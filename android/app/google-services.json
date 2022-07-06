@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "659284825773",
+    "project_id": "smartcamp-40e5c",
+    "storage_bucket": "smartcamp-40e5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659284825773:android:6c11b3499b12359b6c9824",
+        "android_client_info": {
+          "package_name": "com.example.smartcamp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659284825773-eofauk0alp2ug6p98cd478sd8gbdaa4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smartcamp",
+            "certificate_hash": "09045c67140799c9863a0ca0347b6278a6b4088f"
+          }
+        },
+        {
+          "client_id": "659284825773-p9cbmvr54avi1gi0p5vempdvo9pbk5e6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPhkxroozW8EEhj7LoB4a-IMb0OlxS1KA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "659284825773-p9cbmvr54avi1gi0p5vempdvo9pbk5e6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
