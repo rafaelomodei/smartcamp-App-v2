@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smartcamp/components/atoms/button/button.dart';
@@ -15,9 +16,10 @@ import 'package:smartcamp/model/planting.dart';
 import 'package:smartcamp/model/sensors.dart';
 import 'package:smartcamp/screens/private/createCamp/createCamp.dart';
 import 'package:smartcamp/screens/private/home/home.dart';
+import 'package:smartcamp/utils/const.dart';
 
 class SelectCamp extends StatefulWidget {
-  SelectCamp({Key? key}) : super(key: key);
+  const SelectCamp({Key? key}) : super(key: key);
 
   @override
   _SelectCampState createState() => _SelectCampState();
@@ -25,6 +27,25 @@ class SelectCamp extends StatefulWidget {
 
 class _SelectCampState extends State<SelectCamp> {
   final inputNameCampController = TextEditingController();
+  List camps = [];
+
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  @override
+  void initState() {
+    inicitalStateCamp();
+    db.collection(collectionCamp).snapshots().listen((query) {
+      camps = [];
+
+      query.docs.forEach((doc) {
+        setState(() {
+          camps.add(doc.get("name"));
+        });
+      });
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +136,8 @@ class _SelectCampState extends State<SelectCamp> {
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
+                        Text('Eles estão aqui: '),
+                        for (String s in camps) Text(s.toString()),
                       ],
                     )),
               ],
@@ -251,6 +274,20 @@ class _SelectCampState extends State<SelectCamp> {
         MaterialPageRoute(
           builder: (_) => Home(),
         ));
+  }
+
+  void inicitalStateCamp() async {
+    QuerySnapshot query = await db.collection(collectionCamp).get();
+
+    camps = [];
+
+    query.docs.forEach((doc) {
+      setState(() {
+        camps.add(doc.get("name"));
+      });
+    });
+
+    print('inicitalStateCamp::listCamp: ${camps} ');
   }
 }
 

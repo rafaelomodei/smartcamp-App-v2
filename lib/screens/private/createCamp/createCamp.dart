@@ -7,9 +7,12 @@ import 'package:smartcamp/components/organism/containerGlobal/containerGlobal.da
 import 'package:smartcamp/model/camp.dart';
 import 'package:smartcamp/model/listCamp.dart';
 import 'package:smartcamp/screens/private/selectPlant/selectPlant.dart';
+import 'package:smartcamp/utils/const.dart';
 
 class CreateCamp extends StatefulWidget {
-  CreateCamp({Key? key}) : super(key: key);
+  final String img = 'assets/img/png/emojiHappy.png';
+
+  const CreateCamp({Key? key}) : super(key: key);
 
   @override
   State<CreateCamp> createState() => _CreateCampState();
@@ -21,7 +24,20 @@ class _CreateCampState extends State<CreateCamp> {
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
-  String img = 'assets/img/png/emojiHappy.png';
+  // @override
+  // void initState() {
+  //   db.collection(collectionCamp).snapshots().listen((query) {
+  //     List camps = [];
+
+  //     query.docs.forEach((doc) {
+  //       setState(() {
+  //         camps.add(doc);
+  //       });
+  //     });
+  //   });
+
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +75,7 @@ class _CreateCampState extends State<CreateCamp> {
                         child: Column(children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 24),
-                            child: Image.asset(img, scale: 3),
+                            child: Image.asset(widget.img, scale: 3),
                           ),
                           Text(
                             'Criar campo',
@@ -100,7 +116,7 @@ class _CreateCampState extends State<CreateCamp> {
 
   _createCamp(context) {
     final String name = inputNameCampController.text;
-    createData();
+    createCamp();
     if (_validateInputName(name) != null) {
       final Camp newCamp = Camp(name);
       _uptdateListCamp(context, newCamp);
@@ -124,7 +140,24 @@ class _CreateCampState extends State<CreateCamp> {
     Provider.of<ListCamp>(context, listen: false).addCamp(camp);
   }
 
-  void createData() {
-    db.collection('user').doc('esseidaqui').set({"name": "Essenome"});
+  void inicitalStateCamp() async {
+    QuerySnapshot query = await db.collection(collectionCamp).get();
+
+    List listCamp = [];
+
+    query.docs.forEach((doc) {
+      setState(() {
+        listCamp.add(doc);
+      });
+    });
+
+    print('inicitalStateCamp::listCamp: ${listCamp} ');
+  }
+
+  void createCamp() {
+    db
+        .collection(collectionCamp)
+        .doc()
+        .set({"name": inputNameCampController.text});
   }
 }

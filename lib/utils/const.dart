@@ -1,0 +1,1 @@
+String collectionCamp = 'camps';
