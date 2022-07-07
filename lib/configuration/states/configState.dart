@@ -4,7 +4,7 @@ abstract class ConfigState {}
 
 class EmptyConfigState implements ConfigState {}
 
-class LoaginConfigState implements ConfigState {}
+class LoadingConfigState implements ConfigState {}
 
 class LoadedConfigState implements ConfigState {
   final List<CampEntities> camps;

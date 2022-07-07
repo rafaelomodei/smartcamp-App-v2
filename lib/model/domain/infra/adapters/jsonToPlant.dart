@@ -1,5 +1,4 @@
 import 'package:smartcamp/model/domain/entities/plantEntities.dart';
-import 'package:smartcamp/model/domain/entities/plantingEntitie.dart';
 
 class JsonToPlant {
   static PlantEntities fromMap(Map json) {
@@ -8,5 +7,13 @@ class JsonToPlant {
       name: json["name"],
       photo: json["photo"],
     );
+  }
+
+  static Map<String, dynamic> toMap(PlantEntities plant) {
+    return {
+      'id': plant.id,
+      'name': plant.name,
+      'photo': plant.photo,
+    };
   }
 }

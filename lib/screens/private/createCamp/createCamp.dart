@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:smartcamp/components/organism/containerGlobal/containerGlobal.dart';
+import 'package:smartcamp/configuration/blocs/configBloc.dart';
+import 'package:smartcamp/configuration/events/configEvents.dart';
+import 'package:smartcamp/model/domain/entities/campsEntities.dart';
+import 'package:smartcamp/model/domain/entities/plantEntities.dart';
+import 'package:smartcamp/model/domain/entities/plantingEntitie.dart';
+import 'package:smartcamp/model/domain/entities/sensorsEntitie.dart';
 import 'package:smartcamp/model/metodoAntigo/camp.dart';
 import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
 import 'package:smartcamp/screens/private/selectPlant/selectPlant.dart';
@@ -22,7 +28,14 @@ class _CreateCampState extends State<CreateCamp> {
   final inputNameCampController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  FirebaseFirestore db = FirebaseFirestore.instance;
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   WidgetsBinding.instance?.addPostFrameCallback((_) {
+  //     context.read<ConfigBloc>().add(FetchCamps());
+  //   });
+  // }
 
   // @override
   // void initState() {
@@ -116,17 +129,41 @@ class _CreateCampState extends State<CreateCamp> {
 
   _createCamp(context) {
     final String name = inputNameCampController.text;
-    createCamp();
+    // createCamp();
     if (_validateInputName(name) != null) {
-      final Camp newCamp = Camp(name);
+      const PlantEntities newPlant =
+          PlantEntities(id: 'newPlant', name: 'Café', photo: 'url');
+      const SensorsEntities newSensors = SensorsEntities(
+          id: 'newSensors',
+          irrigation: true,
+          isActiveSensors: true,
+          greenhouseCover: false,
+          airHumidity: 1.0,
+          environmentTemperature: 2.0,
+          electricConductivity: 2.5,
+          waterTemperature: 3.5,
+          waterOxygenLevel: 2.2,
+          waterPH: 2.1);
+      const PlantingEntities newPlanting = PlantingEntities(
+        id: 'newPlantingEntitie',
+        plant: newPlant,
+        sensors: newSensors,
+        initialPlantingDate: '1969-07-20 20:18:04Z',
+      );
+
+      final CampEntities newCamp = CampEntities(
+        id: 'aaa',
+        name: name,
+        planting: [newPlanting],
+      );
       _uptdateListCamp(context, newCamp);
       Navigator.pop(context);
 
-      //   Navigator.push(
-      //       context,
-      //       MaterialPageRoute(
-      //         builder: (_) => SelectPlant(camp: Camp(name)),
-      //       ));
+      // Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //       builder: (_) => SelectPlant(camp: Camp(name)),
+      //     ));
     }
   }
 
@@ -134,30 +171,17 @@ class _CreateCampState extends State<CreateCamp> {
     return value != null ? value : null;
   }
 
-  _uptdateListCamp(context, Camp camp) {
+  _uptdateListCamp(context, CampEntities camp) {
     print('Criando um novo campo \n\n');
 
-    Provider.of<ListCamp>(context, listen: false).addCamp(camp);
+    // Provider.of<ListCamp>(context, listen: false).addCamp(camp);
+    // context.read<ConfigBloc>().add(AddNewCampEvent(camp));
   }
 
-  void inicitalStateCamp() async {
-    QuerySnapshot query = await db.collection(collectionCamp).get();
-
-    List listCamp = [];
-
-    query.docs.forEach((doc) {
-      setState(() {
-        listCamp.add(doc);
-      });
-    });
-
-    print('inicitalStateCamp::listCamp: ${listCamp} ');
-  }
-
-  void createCamp() {
-    db
-        .collection(collectionCamp)
-        .doc()
-        .set({"name": inputNameCampController.text});
-  }
+  // void createCamp() {
+  //   db
+  //       .collection(collectionCamp)
+  //       .doc()
+  //       .set({"name": inputNameCampController.text});
+  // }
 }

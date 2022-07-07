@@ -16,4 +16,19 @@ class JsonToSensors {
       waterPH: json["waterPH"],
     );
   }
+
+  static Map<String, dynamic> toMap(SensorsEntities sensors) {
+    return {
+      'id': sensors.id,
+      'irrigation': sensors.irrigation,
+      'isActiveSensors': sensors.isActiveSensors,
+      'greenhouseCover': sensors.greenhouseCover,
+      'airHumidity': sensors.airHumidity,
+      'environmentTemperature': sensors.environmentTemperature,
+      'electricConductivity': sensors.electricConductivity,
+      'waterTemperature': sensors.waterTemperature,
+      'waterOxygenLevel': sensors.waterOxygenLevel,
+      'waterPH': sensors.waterPH,
+    };
+  }
 }

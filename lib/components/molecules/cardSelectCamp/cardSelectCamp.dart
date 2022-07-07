@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smartcamp/configuration/blocs/configBloc.dart';
+import 'package:smartcamp/model/domain/entities/campsEntities.dart';
 import 'package:smartcamp/model/metodoAntigo/camp.dart';
 import 'package:smartcamp/screens/private/selectPlant/selectPlant.dart';
 import 'package:smartcamp/theme/colorSets.dart';
 
-class CardSlectCamp extends StatefulWidget {
-  Camp camp;
+class CardSlectCamp extends StatelessWidget {
+  CampEntities camp;
 
   CardSlectCamp(this.camp, {Key? key}) : super(key: key);
 
-  @override
-  State<CardSlectCamp> createState() => _CardSlectCampState();
-}
-
-class _CardSlectCampState extends State<CardSlectCamp> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +40,7 @@ class _CardSlectCampState extends State<CardSlectCamp> {
           Padding(
             padding: const EdgeInsets.only(left: 16),
             child: Text(
-              widget.camp.getName,
+              camp.name,
               style: Theme.of(context).textTheme.subtitle2,
             ),
           ),
@@ -53,7 +51,7 @@ class _CardSlectCampState extends State<CardSlectCamp> {
             MaterialPageRoute(
               builder: (context) {
                 return SelectPlant(
-                  camp: widget.camp,
+                  camp: camp,
                 );
               },
             ),

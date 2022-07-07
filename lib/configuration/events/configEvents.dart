@@ -2,8 +2,10 @@ import 'package:smartcamp/model/domain/entities/campsEntities.dart';
 
 abstract class ConfigEvent {}
 
-class AddCamps implements ConfigEvent {
-  final List<CampEntities> camps;
+class FetchCamps implements ConfigEvent {}
 
-  AddCamps(this.camps);
+class AddNewCampEvent implements ConfigEvent {
+  final CampEntities camp;
+
+  AddNewCampEvent(this.camp);
 }

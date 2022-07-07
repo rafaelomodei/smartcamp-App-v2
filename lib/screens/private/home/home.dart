@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smartcamp/components/molecules/buttomCamp/buttomCamp.dart';
 import 'package:smartcamp/components/molecules/card/card.dart';
-import 'package:smartcamp/components/organism/listCamps/listCamps.dart';
-import 'package:smartcamp/components/organism/listPlants/listPlants.dart';
-import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
+import 'package:smartcamp/configuration/blocs/configBloc.dart';
+import 'package:smartcamp/configuration/events/configEvents.dart';
+import 'package:smartcamp/configuration/states/configState.dart';
 import 'package:smartcamp/screens/private/selectCamp/selectCamp.dart';
 
 class Home extends StatefulWidget {
@@ -15,10 +14,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool hasPant = false;
+  String img = 'assets/img/png/maracuja.png';
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      context.read<ConfigBloc>().add(FetchCamps());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.watch<ConfigBloc>();
+    final state = bloc.state;
+
     return Scaffold(
       floatingActionButton: Container(
         width: double.infinity,
@@ -65,7 +75,7 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(24.0, 32.0, 24.0, 24.0),
                   child: Text(
-                    'Hortaliças ${hasPant}',
+                    'Hortaliças',
                     textAlign: TextAlign.start,
                     style: Theme.of(context).textTheme.headline3,
                   ),
@@ -73,39 +83,59 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-          Consumer<ListCamp>(builder: (context, listCamp, child) {
-            return listCamp.getListCamp.isNotEmpty
-                ? SliverList(
-                    delegate: SliverChildListDelegate(
-                      List.generate(
-                        listCamp.getListCamp[0].getListPlanting.length,
-                        (index) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                          child: CardItem(
-                            photo: listCamp.getListCamp[0]
-                                .getListPlanting[index].plant.photo,
-                            name: listCamp.getListCamp[0].getListPlanting[index]
-                                .plant.name,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                : SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            'Você não tem nenhum plantio no momento',
-                            textAlign: TextAlign.left,
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-          }),
+          // SliverList(
+          //   delegate: SliverChildListDelegate(
+          //     <Widget>[
+          //       if (state is LoadedConfigState)
+          //         ListView.builder(
+          //           shrinkWrap: true,
+          //           physics: NeverScrollableScrollPhysics(),
+          //           itemCount: state.camps.length,
+          //           itemBuilder: (context, idnex) {
+          //             final camp = state.camps[idnex];
+          //             return CardItem(
+          //               name: camp.name,
+          //               photo: img,
+          //             );
+          //           },
+          //         ),
+          //     ],
+          //   ),
+          // ),
+
+          // Consumer<ListCamp>(builder: (context, listCamp, child) {
+          //   return listCamp.getListCamp.isNotEmpty
+          //       ? SliverList(
+          //           delegate: SliverChildListDelegate(
+          //             List.generate(
+          //               listCamp.getListCamp[0].getListPlanting.length,
+          //               (index) => Padding(
+          //                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          //                 child: CardItem(
+          //                   photo: listCamp.getListCamp[0]
+          //                       .getListPlanting[index].plant.photo,
+          //                   name: listCamp.getListCamp[0].getListPlanting[index]
+          //                       .plant.name,
+          //                 ),
+          //               ),
+          //             ),
+          //           ),
+          //         )
+          //       : SliverToBoxAdapter(
+          //           child: Padding(
+          //             padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          //             child: Column(
+          //               children: <Widget>[
+          //                 Text(
+          //                   'Você não tem nenhum plantio no momento',
+          //                   textAlign: TextAlign.left,
+          //                   style: Theme.of(context).textTheme.bodyText1,
+          //                 ),
+          //               ],
+          //             ),
+          //           ),
+          //         );
+          // }),
           SliverList(
             delegate: SliverChildListDelegate(<Widget>[
               Container(

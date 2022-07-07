@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smartcamp/components/atoms/button/button.dart';
 import 'package:smartcamp/components/organism/containerGlobal/containerGlobal.dart';
+import 'package:smartcamp/screens/private/home/home.dart';
 
 class LoginToken extends StatefulWidget {
   @override
@@ -12,6 +13,38 @@ class _LoginTokenSatate extends State<LoginToken> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.background,
+        ),
+        // child:
+        child: Container(
+          width: double.infinity,
+          height: 56,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              textStyle: const TextStyle(fontSize: 13.0),
+              padding: const EdgeInsets.all(8.0),
+              elevation: 0.0,
+              primary: Theme.of(context).colorScheme.primary,
+              onPrimary: Theme.of(context).colorScheme.onPrimary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              shadowColor: Colors.transparent,
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return Home();
+              }));
+            },
+            child: const Text('Verificar código'),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: ContainerGLobal(
         Center(
           child: Container(
@@ -55,7 +88,7 @@ class _LoginTokenSatate extends State<LoginToken> {
                     ),
                   ),
                 ),
-                Button('Entrar'),
+                // Button('Entrar'),
               ],
             ),
           ),

@@ -8,7 +8,16 @@ class JsonToPlanting {
       id: json["id"],
       plant: JsonToPlant.fromMap(json),
       sensors: JsonToSensors.fromMap(json),
-      initialPlantingDate: DateTime.parse(json["initialPlantingDate"]),
+      initialPlantingDate: json["initialPlantingDate"],
     );
+  }
+
+  static Map<String, dynamic> toMap(PlantingEntities planting) {
+    return {
+      'id': planting.id,
+      'plant': planting.plant,
+      'photo': planting.sensors,
+      'initialPlantingDate': planting.initialPlantingDate,
+    };
   }
 }

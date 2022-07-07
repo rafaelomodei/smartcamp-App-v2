@@ -18,4 +18,10 @@ class CampsRepository implements ICampsRepository {
   List<CampEntities> _convert(List<Map> list) {
     return list.map(JsonToCamps.fromMap).toList();
   }
+
+  @override
+  Future<void> AddNewCamp(CampEntities camp) async {
+    final map = JsonToCamps.toMap(camp);
+    await dataSource.addCamp(map);
+  }
 }

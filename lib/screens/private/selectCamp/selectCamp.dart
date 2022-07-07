@@ -1,54 +1,30 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smartcamp/components/atoms/button/button.dart';
 import 'package:smartcamp/components/molecules/card/card.dart';
 import 'package:smartcamp/components/molecules/cardSelectCamp/cardSelectCamp.dart';
 import 'package:smartcamp/components/molecules/cardSelectPlant/cardSelectPlant.dart';
-import 'package:smartcamp/components/organism/containerGlobal/containerGlobal.dart';
-import 'package:smartcamp/components/organism/taggleSelectCamp/taggleSelectCamp.dart';
-import 'package:smartcamp/components/organism/taggleSelectPlant/taggleSelectPlant.dart';
+import 'package:smartcamp/configuration/blocs/configBloc.dart';
+import 'package:smartcamp/configuration/events/configEvents.dart';
+import 'package:smartcamp/configuration/states/configState.dart';
+import 'package:smartcamp/model/domain/entities/campsEntities.dart';
 import 'package:smartcamp/model/metodoAntigo/camp.dart';
-import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
-import 'package:smartcamp/model/metodoAntigo/listPlants.dart';
 import 'package:smartcamp/model/metodoAntigo/plant.dart';
 import 'package:smartcamp/model/metodoAntigo/planting.dart';
 import 'package:smartcamp/model/metodoAntigo/sensors.dart';
 import 'package:smartcamp/screens/private/createCamp/createCamp.dart';
 import 'package:smartcamp/screens/private/home/home.dart';
-import 'package:smartcamp/utils/const.dart';
 
-class SelectCamp extends StatefulWidget {
-  const SelectCamp({Key? key}) : super(key: key);
+class SelectCamp extends StatelessWidget {
+  SelectCamp({Key? key}) : super(key: key);
 
-  @override
-  _SelectCampState createState() => _SelectCampState();
-}
-
-class _SelectCampState extends State<SelectCamp> {
   final inputNameCampController = TextEditingController();
-  List camps = [];
-
-  FirebaseFirestore db = FirebaseFirestore.instance;
-
-  @override
-  void initState() {
-    inicitalStateCamp();
-    db.collection(collectionCamp).snapshots().listen((query) {
-      camps = [];
-
-      query.docs.forEach((doc) {
-        setState(() {
-          camps.add(doc.get("name"));
-        });
-      });
-    });
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.watch<ConfigBloc>();
+    final state = bloc.state;
+
     return Scaffold(
       floatingActionButton: Container(
         width: double.infinity,
@@ -98,7 +74,6 @@ class _SelectCampState extends State<SelectCamp> {
         elevation: 0.0,
         // backgroundColor: Colors.transparent,
       ),
-
       body: SafeArea(
         top: true,
         bottom: true,
@@ -136,121 +111,32 @@ class _SelectCampState extends State<SelectCamp> {
                             style: Theme.of(context).textTheme.bodyText1,
                           ),
                         ),
-                        Text('Eles estão aqui: '),
-                        for (String s in camps) Text(s.toString()),
                       ],
                     )),
               ],
             ),
           ),
-          Consumer<ListCamp>(builder: (context, listCamps, child) {
-            return SliverList(
-              delegate: SliverChildListDelegate(
-                List.generate(
-                  listCamps.getListCamp.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                    child: CardSlectCamp(listCamps.getListCamp[index]),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              <Widget>[
+                if (state is LoadedConfigState)
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: state.camps.length,
+                    itemBuilder: (context, idnex) {
+                      final camp = state.camps[idnex];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                        child: CardSlectCamp(camp),
+                      );
+                    },
                   ),
-                ),
-              ),
-            );
-          }),
+              ],
+            ),
+          ),
         ]),
       ),
-
-      // body: ContainerGLobal(
-      //   ListView(
-      //     children: <Widget>[
-      //       Column(
-      //         crossAxisAlignment: CrossAxisAlignment.start,
-      //         children: [
-      //           Padding(
-      //             padding: const EdgeInsets.fromLTRB(0, 0, 0, 40),
-      //             child: Column(
-      //               crossAxisAlignment: CrossAxisAlignment.start,
-      //               children: [
-      //                 Text(
-      //                   'É hora',
-      //                   textAlign: TextAlign.left,
-      //                   style: Theme.of(context).textTheme.headline4,
-      //                 ),
-      //                 Text(
-      //                   'de plantar!',
-      //                   style: Theme.of(context).textTheme.headline3,
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //           Padding(
-      //             padding: const EdgeInsets.fromLTRB(0, 0, 0, 24),
-      //             child: Text(
-      //               'Em qual campo você deseja plantar ?',
-      //               textAlign: TextAlign.left,
-      //               style: Theme.of(context).textTheme.bodyText1,
-      //             ),
-      //           ),
-
-      //           // shrinkWrap: true,
-      //         ],
-      //       ),
-
-      //       ElevatedButton(
-      //         child: Text('Criar novo campo'),
-      //         onPressed: () => {
-      //           Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                 builder: (_) => CreateCamp(),
-      //               )),
-      //         },
-      //       ),
-
-      //       Consumer<ListCamp>(builder: (context, listCamps, child) {
-      //         print(listCamps.getListCamp.toString());
-      //         print('Select camp::child: ${child}');
-
-      //         if (listCamps.getListCamp.length == 1) {
-      //           return CardSlectCamp(
-      //             listCamps.getListCamp[0],
-      //             isSelected: true,
-      //           );
-      //         }
-
-      //         if (listCamps.getListCamp.length > 1) {
-      //           print('Entrando dentro do toggle');
-      //           return TaggleSlectCamp(listCamps.getListCamp);
-      //         }
-
-      //         return Container();
-      //       }),
-
-      // Padding(
-      //   padding: const EdgeInsets.symmetric(vertical: 30.0),
-      // )
-      // GridView.count(
-      //   shrinkWrap: true,
-      //   physics: NeverScrollableScrollPhysics(),
-      //   crossAxisCount: isMobile ? 2 : 3,
-      //   crossAxisSpacing: 12.0,
-      //   mainAxisSpacing: 12.0,
-      //   children: List.generate(20, (index) {
-      //     return CardSlectPlant();
-      //   }),
-      // ),
-
-      // alignment: Alignment.bottomCenter,
-      // Positioned(
-      //   bottom: 15.0,
-      //   child: Padding(
-      //     padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-      //     child: Button('Confirmar'),
-      //   ),
-      // ),
-      // ],
-      // ],
-      // ),
-      // ),
     );
   }
 
@@ -258,14 +144,14 @@ class _SelectCampState extends State<SelectCamp> {
     return value.length != 9 ? 'aasd' : '';
   }
 
-  _createPlanting(Camp camp) {
+  _createPlanting(context, CampEntities camp) {
     Plant plantMilho = Plant('Milho', 'photo', new DateTime(2022));
     Sensors sensors = Sensors(false, true, false, 0, 0, 2, 3, 7, 0);
 
     Planting planting = Planting(plantMilho, sensors);
 
     print(planting);
-    camp.addPlant(planting);
+    // camp.addPlant(planting);
 
     // Provider.of<ListCamp>(context, listen: false).addPlant(plantMilho);
 
@@ -274,20 +160,6 @@ class _SelectCampState extends State<SelectCamp> {
         MaterialPageRoute(
           builder: (_) => Home(),
         ));
-  }
-
-  void inicitalStateCamp() async {
-    QuerySnapshot query = await db.collection(collectionCamp).get();
-
-    camps = [];
-
-    query.docs.forEach((doc) {
-      setState(() {
-        camps.add(doc.get("name"));
-      });
-    });
-
-    print('inicitalStateCamp::listCamp: ${camps} ');
   }
 }
 

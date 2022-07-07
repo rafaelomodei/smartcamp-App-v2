@@ -12,4 +12,13 @@ class JsonToCamps {
       ],
     );
   }
+
+  static Map<String, dynamic> toMap(CampEntities camp) {
+    return {
+      'id': camp.id,
+      'name': camp.name,
+      'plantings':
+          camp.planting.map((planting) => JsonToPlanting.toMap(planting)),
+    };
+  }
 }

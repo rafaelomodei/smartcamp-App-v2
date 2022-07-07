@@ -5,7 +5,7 @@ class PlantingEntities {
   final String id;
   final PlantEntities plant;
   final SensorsEntities sensors;
-  final DateTime initialPlantingDate;
+  final String initialPlantingDate;
 
   const PlantingEntities({
     required this.id,
