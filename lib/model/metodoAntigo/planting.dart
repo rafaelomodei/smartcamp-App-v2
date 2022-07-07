@@ -1,5 +1,5 @@
-import './sensors.dart';
-import './plant.dart';
+import 'sensors.dart';
+import 'plant.dart';
 
 class Planting {
   Plant plant;

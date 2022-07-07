@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartcamp/model/plant.dart';
+import 'package:smartcamp/model/metodoAntigo/plant.dart';
 import 'package:smartcamp/theme/colorSets.dart';
 
 class CardSlectPlant extends StatefulWidget {

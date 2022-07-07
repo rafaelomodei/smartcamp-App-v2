@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:smartcamp/components/organism/containerGlobal/containerGlobal.dart';
-import 'package:smartcamp/model/camp.dart';
-import 'package:smartcamp/model/listCamp.dart';
+import 'package:smartcamp/model/metodoAntigo/camp.dart';
+import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
 import 'package:smartcamp/screens/private/selectPlant/selectPlant.dart';
 import 'package:smartcamp/utils/const.dart';
 

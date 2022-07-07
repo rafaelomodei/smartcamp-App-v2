@@ -4,7 +4,7 @@ import 'package:smartcamp/components/molecules/buttomCamp/buttomCamp.dart';
 import 'package:smartcamp/components/molecules/card/card.dart';
 import 'package:smartcamp/components/organism/listCamps/listCamps.dart';
 import 'package:smartcamp/components/organism/listPlants/listPlants.dart';
-import 'package:smartcamp/model/listCamp.dart';
+import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
 import 'package:smartcamp/screens/private/selectCamp/selectCamp.dart';
 
 class Home extends StatefulWidget {

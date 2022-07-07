@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartcamp/model/camp.dart';
+import 'package:smartcamp/model/metodoAntigo/camp.dart';
 
 class ListCamp extends ChangeNotifier {
   final List<Camp> _listCamp = [];

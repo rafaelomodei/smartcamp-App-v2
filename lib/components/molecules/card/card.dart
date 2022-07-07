@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smartcamp/model/plant.dart';
+import 'package:smartcamp/model/metodoAntigo/plant.dart';
 
 class CardItem extends StatelessWidget {
   final String name;

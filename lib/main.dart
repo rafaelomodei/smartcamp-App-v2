@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:smartcamp/model/listCamp.dart';
-import 'package:smartcamp/model/listPlants.dart';
+import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
+import 'package:smartcamp/model/metodoAntigo/listPlants.dart';
 import 'package:smartcamp/screens/private/home/home.dart';
 import 'package:smartcamp/theme/themeDefault.dart';
 // Import the generated file

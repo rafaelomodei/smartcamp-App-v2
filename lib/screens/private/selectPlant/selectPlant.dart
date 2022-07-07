@@ -5,12 +5,12 @@ import 'package:smartcamp/components/molecules/card/card.dart';
 import 'package:smartcamp/components/molecules/cardSelectPlant/cardSelectPlant.dart';
 import 'package:smartcamp/components/organism/containerGlobal/containerGlobal.dart';
 import 'package:smartcamp/components/organism/taggleSelectPlant/taggleSelectPlant.dart';
-import 'package:smartcamp/model/camp.dart';
-import 'package:smartcamp/model/listCamp.dart';
-import 'package:smartcamp/model/listPlants.dart';
-import 'package:smartcamp/model/plant.dart';
-import 'package:smartcamp/model/planting.dart';
-import 'package:smartcamp/model/sensors.dart';
+import 'package:smartcamp/model/metodoAntigo/camp.dart';
+import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
+import 'package:smartcamp/model/metodoAntigo/listPlants.dart';
+import 'package:smartcamp/model/metodoAntigo/plant.dart';
+import 'package:smartcamp/model/metodoAntigo/planting.dart';
+import 'package:smartcamp/model/metodoAntigo/sensors.dart';
 import 'package:smartcamp/screens/private/home/home.dart';
 
 class SelectPlant extends StatefulWidget {

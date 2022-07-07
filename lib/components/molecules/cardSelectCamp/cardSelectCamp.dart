@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartcamp/model/camp.dart';
+import 'package:smartcamp/model/metodoAntigo/camp.dart';
 import 'package:smartcamp/screens/private/selectPlant/selectPlant.dart';
 import 'package:smartcamp/theme/colorSets.dart';
 

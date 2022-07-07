@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smartcamp/components/molecules/card/card.dart';
-import 'package:smartcamp/model/camp.dart';
-import 'package:smartcamp/model/listCamp.dart';
-import 'package:smartcamp/model/listPlants.dart';
+import 'package:smartcamp/model/metodoAntigo/camp.dart';
+import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
+import 'package:smartcamp/model/metodoAntigo/listPlants.dart';
 
 class Plants extends StatelessWidget {
   const Plants({Key? key}) : super(key: key);

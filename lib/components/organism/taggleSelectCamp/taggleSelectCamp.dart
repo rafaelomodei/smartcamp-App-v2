@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smartcamp/components/molecules/cardSelectCamp/cardSelectCamp.dart';
 import 'package:smartcamp/components/molecules/cardSelectPlant/cardSelectPlant.dart';
-import 'package:smartcamp/model/camp.dart';
-import 'package:smartcamp/model/listCamp.dart';
-import 'package:smartcamp/model/plant.dart';
+import 'package:smartcamp/model/metodoAntigo/camp.dart';
+import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
+import 'package:smartcamp/model/metodoAntigo/plant.dart';
 import 'package:smartcamp/theme/colorSets.dart';
 
 class TaggleSlectCamp extends StatefulWidget {

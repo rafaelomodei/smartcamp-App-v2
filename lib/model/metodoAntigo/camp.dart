@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './planting.dart';
+import 'planting.dart';
 
 class Camp extends ChangeNotifier {
   final String _name;
