@@ -7,7 +7,7 @@ import 'package:smartcamp/components/molecules/cardSelectPlant/cardSelectPlant.d
 import 'package:smartcamp/configuration/blocs/configBloc.dart';
 import 'package:smartcamp/configuration/events/configEvents.dart';
 import 'package:smartcamp/configuration/states/configState.dart';
-import 'package:smartcamp/model/domain/entities/campsEntities.dart';
+import 'package:smartcamp/model/domain/entities/campEntity.dart';
 import 'package:smartcamp/model/metodoAntigo/camp.dart';
 import 'package:smartcamp/model/metodoAntigo/plant.dart';
 import 'package:smartcamp/model/metodoAntigo/planting.dart';
@@ -15,8 +15,18 @@ import 'package:smartcamp/model/metodoAntigo/sensors.dart';
 import 'package:smartcamp/screens/private/createCamp/createCamp.dart';
 import 'package:smartcamp/screens/private/home/home.dart';
 
-class SelectCamp extends StatelessWidget {
+class SelectCamp extends StatefulWidget {
   SelectCamp({Key? key}) : super(key: key);
+
+  @override
+  State<SelectCamp> createState() => _SelectCampState();
+}
+
+class _SelectCampState extends State<SelectCamp> with CompleteStateMixin {
+  @override
+  void completeState() {
+    context.read<ConfigBloc>().add(FetchCamps());
+  }
 
   final inputNameCampController = TextEditingController();
 
@@ -144,7 +154,7 @@ class SelectCamp extends StatelessWidget {
     return value.length != 9 ? 'aasd' : '';
   }
 
-  _createPlanting(context, CampEntities camp) {
+  _createPlanting(context, CampEntity camp) {
     Plant plantMilho = Plant('Milho', 'photo', new DateTime(2022));
     Sensors sensors = Sensors(false, true, false, 0, 0, 2, 3, 7, 0);
 
@@ -160,6 +170,18 @@ class SelectCamp extends StatelessWidget {
         MaterialPageRoute(
           builder: (_) => Home(),
         ));
+  }
+}
+
+mixin CompleteStateMixin<T extends StatefulWidget> on State<T> {
+  void completeState();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      completeState();
+    });
   }
 }
 

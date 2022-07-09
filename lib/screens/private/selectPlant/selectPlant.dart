@@ -5,7 +5,7 @@ import 'package:smartcamp/components/molecules/card/card.dart';
 import 'package:smartcamp/components/molecules/cardSelectPlant/cardSelectPlant.dart';
 import 'package:smartcamp/components/organism/containerGlobal/containerGlobal.dart';
 import 'package:smartcamp/components/organism/taggleSelectPlant/taggleSelectPlant.dart';
-import 'package:smartcamp/model/domain/entities/campsEntities.dart';
+import 'package:smartcamp/model/domain/entities/campEntity.dart';
 import 'package:smartcamp/model/metodoAntigo/camp.dart';
 import 'package:smartcamp/model/metodoAntigo/listCamp.dart';
 import 'package:smartcamp/model/metodoAntigo/listPlants.dart';
@@ -15,7 +15,7 @@ import 'package:smartcamp/model/metodoAntigo/sensors.dart';
 import 'package:smartcamp/screens/private/home/home.dart';
 
 class SelectPlant extends StatefulWidget {
-  CampEntities camp;
+  CampEntity camp;
 
   SelectPlant({Key? key, required this.camp}) : super(key: key);
 
@@ -131,7 +131,7 @@ class _SelectPlantState extends State<SelectPlant> {
     return value.length != 9 ? 'aasd' : '';
   }
 
-  _createPlanting(CampEntities camp, Plant plant) {
+  _createPlanting(CampEntity camp, Plant plant) {
     Sensors sensors = Sensors(false, true, false, 0, 0, 2, 3, 7, 0);
 
     Planting planting = Planting(plant, sensors);

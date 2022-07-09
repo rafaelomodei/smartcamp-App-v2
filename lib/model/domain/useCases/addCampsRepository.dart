@@ -1,17 +1,17 @@
-import 'package:smartcamp/model/domain/entities/campsEntities.dart';
+import 'package:smartcamp/model/domain/entities/campEntity.dart';
 import 'package:smartcamp/model/domain/repositories/campsRepository.dart';
 
 abstract class IAddNewCamp {
-  Future<void> call(CampEntities camp);
+  Future<void> call(CampEntity camp);
 }
 
-class AddNewCamp implements IAddNewCamp {
-  final ICampsRepository repositiry;
+// class AddNewCamp implements IAddNewCamp {
+//   final ICampsRepository repositiry;
 
-  AddNewCamp(this.repositiry);
+//   AddNewCamp(this.repositiry);
 
-  @override
-  Future<void> call(CampEntities camp) async {
-    return await repositiry.AddNewCamp(camp);
-  }
-}
+//   @override
+//   Future<void> call(CampEntity camp) async {
+//     return await repositiry.AddNewCamp(camp);
+//   }
+// }

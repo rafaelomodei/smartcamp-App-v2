@@ -1,13 +1,13 @@
 import 'package:smartcamp/model/domain/entities/plantingEntitie.dart';
 
-class CampEntities {
+class CampEntity {
   final String id;
   final String name;
-  final List<PlantingEntities> planting;
+  // final List<PlantingEntities> planting;
 
-  const CampEntities({
+  const CampEntity({
     required this.id,
     required this.name,
-    required this.planting,
+    // required this.planting,
   });
 }

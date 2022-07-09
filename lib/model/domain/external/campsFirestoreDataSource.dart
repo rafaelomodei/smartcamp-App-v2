@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:smartcamp/model/domain/entities/campsEntities.dart';
+import 'package:smartcamp/model/domain/entities/campEntity.dart';
 import 'package:smartcamp/model/domain/infra/adapters/jsonToCamps.dart';
 import 'package:smartcamp/model/domain/infra/dataSource/campsDataSource.dart';
 import 'package:smartcamp/utils/const.dart';
@@ -25,10 +25,10 @@ class CampsFirestoreDataSource implements ICampsDataSource {
         .toList();
   }
 
-  @override
-  Future<void> addCamp(Map<String, dynamic> campMap) async {
-    final ref = firestore.collection('camps');
-    campMap.remove('id');
-    ref.add(campMap);
-  }
+  // @override
+  // Future<void> addCamp(Map<String, dynamic> campMap) async {
+  //   final ref = firestore.collection('camps');
+  //   campMap.remove('id');
+  //   ref.add(campMap);
+  // }
 }

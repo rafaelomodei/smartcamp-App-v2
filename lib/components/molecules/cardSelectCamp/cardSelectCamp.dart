@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smartcamp/configuration/blocs/configBloc.dart';
-import 'package:smartcamp/model/domain/entities/campsEntities.dart';
+import 'package:smartcamp/model/domain/entities/campEntity.dart';
 import 'package:smartcamp/model/metodoAntigo/camp.dart';
 import 'package:smartcamp/screens/private/selectPlant/selectPlant.dart';
 import 'package:smartcamp/theme/colorSets.dart';
 
 class CardSlectCamp extends StatelessWidget {
-  CampEntities camp;
+  CampEntity camp;
 
   CardSlectCamp(this.camp, {Key? key}) : super(key: key);
 

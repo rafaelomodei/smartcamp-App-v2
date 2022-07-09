@@ -14,5 +14,5 @@ final campsModule = [
   Provider<ICampsRepository>(
       create: (context) => CampsRepository(context.read())),
   Provider<IGetAllCamps>(create: (context) => GetAllCamps(context.read())),
-  Provider<IAddNewCamp>(create: (context) => AddNewCamp(context.read())),
+  // Provider<IAddNewCamp>(create: (context) => AddNewCamp(context.read())),
 ];

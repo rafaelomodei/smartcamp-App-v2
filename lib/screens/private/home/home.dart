@@ -15,14 +15,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String img = 'assets/img/png/maracuja.png';
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      context.read<ConfigBloc>().add(FetchCamps());
-    });
-  }
+  //   WidgetsBinding.instance?.addPostFrameCallback((_) {
+  //     context.read<ConfigBloc>().add(FetchCamps());
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
-import 'package:smartcamp/model/domain/entities/campsEntities.dart';
+import 'package:smartcamp/model/domain/entities/campEntity.dart';
 
 abstract class ICampsRepository {
-  Stream<List<CampEntities>> getAllCamps();
+  Stream<List<CampEntity>> getAllCamps();
 
-  Future<void> AddNewCamp(CampEntities camp);
+  // Future<void> AddNewCamp(CampEntity camp);
 }

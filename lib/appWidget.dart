@@ -18,7 +18,7 @@ class AppWidget extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: themeDefault(),
-        home: Login(),
+        home: Home(),
         debugShowCheckedModeBanner: false,
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:smartcamp/model/domain/entities/campsEntities.dart';
+import 'package:smartcamp/model/domain/entities/campEntity.dart';
 
 abstract class ConfigState {}
 
@@ -7,7 +7,7 @@ class EmptyConfigState implements ConfigState {}
 class LoadingConfigState implements ConfigState {}
 
 class LoadedConfigState implements ConfigState {
-  final List<CampEntities> camps;
+  final List<CampEntity> camps;
 
   LoadedConfigState(this.camps);
 }

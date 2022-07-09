@@ -1,24 +1,24 @@
-import 'package:smartcamp/model/domain/entities/campsEntities.dart';
-import 'package:smartcamp/model/domain/infra/adapters/jsonToPlanting.dart';
+import 'package:smartcamp/model/domain/entities/campEntity.dart';
 
 class JsonToCamps {
-  static CampEntities fromMap(Map json) {
-    return CampEntities(
+  static CampEntity fromMap(Map json) {
+    return CampEntity(
       id: json["id"],
       name: json["name"],
-      planting: [
-        if (json.containsKey('planting'))
-          ...(json['planting'] as List).map(JsonToPlanting.fromMap).toList(),
-      ],
+      // planting: [
+      //   if (json.containsKey('planting'))
+      //     ...(json['planting'] as List).map(JsonToPlanting.fromMap).toList(),
+      // ],
     );
   }
 
-  static Map<String, dynamic> toMap(CampEntities camp) {
-    return {
-      'id': camp.id,
-      'name': camp.name,
-      'plantings':
-          camp.planting.map((planting) => JsonToPlanting.toMap(planting)),
-    };
-  }
+  // static Map<String, dynamic> toMap(CampEntity camp) {
+  //   return {
+  //     'id': camp.id,
+  //     'name': camp.name,
+  //     // 'plantings': camp.planting.map(
+  //     //   (planting) => JsonToPlanting.toMap(planting),
+  //     // ),
+  //   };
+  // }
 }

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:smartcamp/components/organism/containerGlobal/containerGlobal.dart';
 import 'package:smartcamp/configuration/blocs/configBloc.dart';
 import 'package:smartcamp/configuration/events/configEvents.dart';
-import 'package:smartcamp/model/domain/entities/campsEntities.dart';
+import 'package:smartcamp/model/domain/entities/campEntity.dart';
 import 'package:smartcamp/model/domain/entities/plantEntities.dart';
 import 'package:smartcamp/model/domain/entities/plantingEntitie.dart';
 import 'package:smartcamp/model/domain/entities/sensorsEntitie.dart';
@@ -151,10 +151,10 @@ class _CreateCampState extends State<CreateCamp> {
         initialPlantingDate: '1969-07-20 20:18:04Z',
       );
 
-      final CampEntities newCamp = CampEntities(
+      final CampEntity newCamp = CampEntity(
         id: 'aaa',
         name: name,
-        planting: [newPlanting],
+        // planting: [newPlanting],
       );
       _uptdateListCamp(context, newCamp);
       Navigator.pop(context);
@@ -171,7 +171,7 @@ class _CreateCampState extends State<CreateCamp> {
     return value != null ? value : null;
   }
 
-  _uptdateListCamp(context, CampEntities camp) {
+  _uptdateListCamp(context, CampEntity camp) {
     print('Criando um novo campo \n\n');
 
     // Provider.of<ListCamp>(context, listen: false).addCamp(camp);
